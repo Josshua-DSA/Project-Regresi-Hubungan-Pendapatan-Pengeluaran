@@ -31,10 +31,10 @@ def r2(y_true: Iterable[float], y_pred: Iterable[float]) -> float:
 	return 1.0 - (ss_res / ss_tot if ss_tot != 0 else 0.0)
 
 def r2_adjusted(y_true: Iterable[float], y_pred: Iterable[float], n: int, p: int) -> float:
-    """
-    Adjusted R^2 = 1 - (1 - R^2) * (n - 1) / (n - p - 1)
-    n = jumlah sampel, p = jumlah parameter bebas (tidak termasuk intercept).
-    """
+	"""
+	Adjusted R^2 = 1 - (1 - R^2) * (n - 1) / (n - p - 1)
+	n = jumlah sampel, p = jumlah parameter bebas (tidak termasuk intercept).
+	"""
 	if n <= p + 1:
  		# tak terdefinisi; kembalikan NaN agar tidak menyesatkan
 		return float("nan")

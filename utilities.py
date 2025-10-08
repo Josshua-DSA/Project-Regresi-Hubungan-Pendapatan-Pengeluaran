@@ -1,4 +1,3 @@
-Python
 # matriks/utilities.py
 
 def print_matrix(matrix):

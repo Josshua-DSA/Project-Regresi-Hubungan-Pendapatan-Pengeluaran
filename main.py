@@ -3,7 +3,7 @@ from utilities.import_csv import read_rows
 from operations.matriks_feature import build_features
 from operations.matriks_target import build_target
 from operations.eda import eda_csv_summary
-from regressions.linear_regression import LinearRegression
+from regression.linear_regression import LinearRegression
 
 def main():
     	# === 1. Baca data ===

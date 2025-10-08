@@ -2,7 +2,7 @@
 from __future__ import annotations
 from typing import Dict, List, Optional
 import math
-from utilities.dataloader import read_rows
+from utilities.import_csv import read_rows
 
 # ------------------ Statistik Dasar ------------------ #
 def _mean(arr: List[float]) -> float:
@@ -20,7 +20,7 @@ def _std(arr: List[float], sample: bool = True) -> float:
 	return math.sqrt(var) if not math.isnan(var) else float("nan")
 
 def _percentile(arr: List[float], p: float) -> float:
-    """Menghitung persentil (0–100) tanpa numpy."""
+	"""Menghitung persentil (0–100) tanpa numpy."""
 	if not arr:
 		return float("nan")
 	sorted_arr = sorted(arr)
@@ -34,8 +34,8 @@ def _percentile(arr: List[float], p: float) -> float:
 # ------------------ Fungsi Utama ------------------ #
 def eda_csv_summary(csv_path: str,has_header: bool = True) -> Dict[str, Dict[str, float]]:
 	"""Membaca file CSV dan menghitung statistik dasar:
-    	   Mean, Std, Min, Q1, Median(Q2), Q3, Max, Count
-	   untuk setiap kolom numerik."""
+	Mean, Std, Min, Q1, Median(Q2), Q3, Max, Count
+	untuk setiap kolom numerik."""
 	rows, header = read_rows(csv_path, has_header=has_header)
 	if not rows:
 		raise ValueError("CSV tidak memiliki data.")
