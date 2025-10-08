@@ -1,87 +1,71 @@
-# matriks/main.py
-#from matriks.matrix import Matrix
-#from matriks.operations.adder import add_matrices
-#from matriks.operations.multiplier import multiply_matrices
-#from matriks.utilities import print_matrix
-#from sparsematrix import SparseMatrix
-#from matrix import Matrix
-#from operations.adder import add_matrices
-#if __name__ == "__main__":
-	#matriks_a = Matrix([[1, 2], [3, 4]])
-	#matriks_b = Matrix([[5, 6], [7, 8]])
-	#print("Hasil Penjumlahan:")
-	#hasil_penjumlahan = add_matrices(matriks_a, matriks_b)
-	#print_matrix(hasil_penjumlahan)
-	#print("\nHasil Perkalian:")
-	#hasil_perkalian = multiply_matrices(matriks_a, matriks_b)
-	#print_matrix(hasil_perkalian)
+# main.py
+from utilities.import_csv import read_rows
+from operations.matriks_feature import build_features
+from operations.matriks_target import build_target
+from operations.eda import eda_csv_summary
+from regressions.linear_regression import LinearRegression
 
-# ... (kode impor lainnya)
-#from exporters.csv_exporter import export_to_csv
-#if __name__ == "__main__":
-	# ... (kode demonstrasi lainnya)
-	#matrix_c = Matrix([[10, 20], [30, 40]])
-	#print("\nMenyimpan Matriks C ke file CSV:")
-	#export_to_csv(matrix_c, "matriks_c.csv")
+def main():
+    	# === 1. Baca data ===
+	csv_path = "IceCreamData.csv"
+	rows, header = read_rows(csv_path, has_header=True)
 
-# ... (kode lain)
-#import time
-#from matrix import Matrix
-#from operations.multiplier import multiply_matrices
-#def create_sparse_data(size):
-#	data = [[0] * size for _ in range(size)]
-#	data[0][0] = 1
-#	data[size-1][size-1] = 1
-#	return data
+	print("=== DATASET ===")
+	print(f"Jumlah data: {len(rows)} baris")
+	print(f"Kolom: {header}\n")
 
-# ... (impor modul lain)
-#from sparsematrix import SparseMatrix
-#from operations.multiplier import multiply_matrices
-#import time
-# (Fungsi create_sparse_data tetap ada)
-#if __name__ == "__main__":
-#	print("\n--- Menguji Solusi dengan SparseMatrix ---")
-#	sparse_data_1000 = create_sparse_data(1000)
-# Perhatikan: kita instansiasi SparseMatrix
-#	mat_a = SparseMatrix(sparse_data_1000)
-#	mat_b = SparseMatrix(sparse_data_1000)
-#	start_time = time.time()
-# Perhatikan: fungsi multiply_matrices() tidak berubah sama sekali
-#	product_mat = multiply_matrices(mat_a, mat_b)
-#	end_time = time.time()
-#	print(f"Waktu yang dibutuhkan untuk perkalian: {end_time - start_time:.2f} detik")
+    	# === 2. Lakukan EDA sederhana ===
+	print("=== EDA Statistik Deskriptif ===")
+	summary = eda_csv_summary(csv_path, has_header=True)
+	for col, stats in summary.items():
+		print(f"\nKolom: {col}")
+		for key, val in stats.items():
+			print(f"  {key:>6}: {val:.4f}")
+	print("\n")
 
-#if __name__ == "__main__":
-# ... (kode uji coba lainnya dari latihan sebelumnya)
-#	print("\n--- Pembuktian OCP dengan Penjumlahan ---")
-# Matriks padat (dense)
-#	matriks_padat = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-# Matriks jarang (sparse) yang memiliki nilai yang sama
-#	matriks_jarang = SparseMatrix([[1, 0, 0], [0, 5, 0], [7, 0, 9]])# Lakukan penjumlahan matriks padat + matriks jarang
-# Perhatikan: fungsi 'add_matrices()' tidak diubah sama sekali
-#	hasil_penjumlahan = add_matrices(matriks_padat, matriks_jarang)
-#	print("Hasil Penjumlahan Matriks Biasa dan Sparse:")
-#	print(hasil_penjumlahan)
+    	# === 3. Bentuk matriks fitur dan target ===
+	if header and "Revenue" in header:
+		target_idx = header.index("Revenue")
+	else:
+		target_idx = len(rows[0]) - 1  # kolom terakhir
 
-# ... (impor lainnya)
-from matrix import Matrix
-from exporters.csv_exporter import export_to_csv
-from exporters.json_exporter import export_to_json
+	X, feat_names = build_features(rows, target_index=target_idx)
+	y_vec = build_target(rows, target_index=target_idx)
+	y = [r[0] for r in y_vec.to_list()]
+
+    	# === 4. Jalankan regresi linear ===
+	model = LinearRegression(fit_intercept=True)
+	model.fit(X, y)
+
+	print("=== HASIL REGRESI LINEAR ===")
+	if model.fit_intercept:
+		print(f"Intercept : {model.coef_[0]:.6f}")
+	for i, w in enumerate(model.coef_[1:], 1):
+		print(f"w{i:<2}      : {w:.6f}")
+	else:
+		for i, w in enumerate(model.coef_, 1):
+			print(f"w{i:<2}      : {w:.6f}")
+
+	# === 5. Evaluasi metrik ===
+	r2 = model.score_r2(X, y)
+	r2_adj = model.score_r2_adj(X, y)
+	mae = model.score_mae(X, y)
+	mse = model.score_mse(X, y)
+	rmse = model.score_rmse(X, y)
+
+	print("\n=== METRIK MODEL ===")
+	print(f"R²        : {r2:.6f}")
+	print(f"Adj. R²   : {r2_adj:.6f}")
+	print(f"MAE       : {mae:.6f}")
+	print(f"MSE       : {mse:.6f}")
+	print(f"RMSE      : {rmse:.6f}")
+
+	# === 6. Contoh prediksi ===
+	preds = model.predict(X)
+	print("\n=== CONTOH PREDIKSI ===")
+	for i in range(min(5, len(preds))):
+		print(f"Data-{i+1}: aktual={y[i]:.4f}, prediksi={preds[i]:.4f}")
 
 if __name__ == "__main__":
-# ... (kode demo lainnya dari latihan sebelumnya)
-	print("\n--- Menguji Matrix Exporters ---")
-# Buat objek matriks yang akan diekspor
-	matriks_demo = Matrix([
-		[1, 2, 3],
-		[4, 5, 6],
-		[7, 8, 9]
-	])
-	# Ekspor ke CSV
-	# Perhatikan bahwa kita memanggil fungsi baru tanpa mengubah kelas Matrix
-	print("Mengekspor matriks ke format CSV...")
-	export_to_csv(matriks_demo, "matriks_output.csv")
-	# Ekspor ke JSON
-	# Ini juga membuktikan OCP karena kelas Matrix tidak perlu diubah
-	print("\nMengekspor matriks ke format JSON...")
-	export_to_json(matriks_demo, "matriks_output.json")
+	main()
+
