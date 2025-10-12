@@ -27,68 +27,66 @@
     
     <main id="main-content" class="container hidden">
         <div class="grid">
-            <div class="grid grid-cols-3">
-                
-                <div class="card col-span-2">
-                    <div class="card-header">
-                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                        <h2 class="card-title">Grafik Regresi: Revenue vs Temperature</h2>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="regressionChart"></canvas>
-                    </div>
+
+            <div class="card">
+                <p class="description">Dashboard ini menampilkan hasil analisis regresi antara variabel <strong>Temperature</strong> dan <strong>Revenue</strong> dari dataset es krim. Gunakan informasi ini untuk memahami hubungan antara suhu dan pendapatan penjualan es krim.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <h2 class="card-title">Grafik Regresi: Revenue vs Temperature</h2>
                 </div>
-                
-                <div>
-                    <div class="card">
-                        <div class="card-header">
-                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                            <h2 class="card-title" style="font-size: 1rem;">Histogram Variabel Temp</h2>
-                        </div>
-                        <div class="chart-container-small">
-                            <canvas id="tempHistogram"></canvas>
-                        </div>
-                    </div>
+                <div class="chart-container">
+                    <canvas id="regressionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    <h2 class="card-title" style="font-size: 1rem;">Histogram Variabel Temp</h2>
+                </div>
+                <div class="chart-container-small">
+                    <canvas id="tempHistogram"></canvas>
+                </div>
+            </div>
                     
-                    <div class="card">
-                        <div class="card-header">
-                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                            <h2 class="card-title" style="font-size: 1rem;">Histogram Variabel Revenue</h2>
-                        </div>
-                        <div class="chart-container-small">
-                            <canvas id="revenueHistogram"></canvas>
-                        </div>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    <h2 class="card-title" style="font-size: 1rem;">Histogram Variabel Revenue</h2>
+                </div>
+                <div class="chart-container-small">
+                    <canvas id="revenueHistogram"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span style="font-size: 1.25rem;">📊</span>
+                    <h2 class="card-title">Evaluation Metrics</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table id="metricsTable">
+                        <thead>
+                            <tr>
+                                <th>Metrik</th>
+                                <th class="text-right">Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metricsBody">
+                        </tbody>
+                    </table>
                 </div>
             </div>
             
-            <div class="grid grid-cols-2">
-                <div class="card">
-                    <div class="card-header">
-                        <span style="font-size: 1.25rem;">📊</span>
-                        <h2 class="card-title">Evaluation Metrics</h2>
-                    </div>
-                    <div class="table-wrapper">
-                        <table id="metricsTable">
-                            <thead>
-                                <tr>
-                                    <th>Metrik</th>
-                                    <th class="text-right">Nilai</th>
-                                </tr>
-                            </thead>
-                            <tbody id="metricsBody">
-                                </tbody>
-                        </table>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <span style="font-size: 1.25rem;">🔢</span>
+                    <h2 class="card-title">EDA (Statistik Deskriptif)</h2>
                 </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <span style="font-size: 1.25rem;">🔢</span>
-                        <h2 class="card-title">EDA (Statistik Deskriptif)</h2>
-                    </div>
-                    <div class="stats-grid" id="statsGrid">
-                        </div>
+                <div class="stats-grid" id="statsGrid">
                 </div>
             </div>
         </div>
