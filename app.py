@@ -2,11 +2,11 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from matrix import Matrix
-from utilities.dataloader import read_rows
+from utilities.import_csv import read_rows
 from operations.matriks_feature import build_features
 from operations.matriks_target import build_target
 from operations.eda import eda_csv_summary
-from regressions.linear_regression import LinearRegression
+from regression.linear_regression import LinearRegression
 
 app = Flask(__name__)
 CORS(app)  # izinkan semua origin saat dev
