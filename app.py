@@ -10,6 +10,7 @@ from regression.linear_regression import LinearRegression
 
 app = Flask(__name__)
 CORS(app)  # izinkan semua origin saat dev
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 CSV_PATH = "IceCreamData.csv"  # dataset berada di root repo
 
@@ -152,10 +153,6 @@ def get_dashboard_data():
         eda_summary = eda_csv_summary(CSV_PATH, has_header=True)
         stats_temp_key = header[feature_idx]
         stats_temp = eda_summary.get(stats_temp_key, {})
-        
-        eda_summary = eda_csv_summary(CSV_PATH, has_header=True)
-        stats_revenue_key = header[feature_idx]
-        stats_revenue = eda_summary.get(stats_revenue_key, {})
 
         # 7) Metrik
         metrics = {
@@ -171,7 +168,6 @@ def get_dashboard_data():
             "line_data": line_data,
             "metrics": metrics,
             "stats_temp": stats_temp,
-            "stats_revenue": stats_revenue,
             "histogram_temp": temp_hist,
             "histogram_revenue": revenue_hist
         })

@@ -37,7 +37,6 @@ async function fetchData() {
         // 4. Isi Tabel
         populateMetrics(data.metrics);
         populateStatistics(data.stats_temp);
-        populateStatistics(data.stats_revenue);
         
         // Sembunyikan loading, tampilkan konten
         document.getElementById('loading').classList.add('hidden');
