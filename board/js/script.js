@@ -36,7 +36,7 @@ async function fetchData() {
 
         // 4. Isi Tabel
         populateMetrics(data.metrics);
-        populateStatistics(data.stats_temp);
+        // populateStatistics(data.stats_temp);
         
         // Sembunyikan loading, tampilkan konten
         document.getElementById('loading').classList.add('hidden');
@@ -150,32 +150,32 @@ function populateMetrics(metrics) {
     `).join('');
 }
 
-function populateStatistics(data) {
-    const stats = data.stats_temp; 
-    const statsGrid = document.getElementById('statsGrid');
+// function populateStatistics(data) {
+//     const stats = data.stats_temp; 
+//     const statsGrid = document.getElementById('statsGrid');
     
-    if (!stats) {
-         statsGrid.innerHTML = `<p class="stats-label" style="grid-column: span 2;">Data statistik (Temp) tidak tersedia. Cek data EDA backend.</p>`;
-         return;
-    }
+//     if (!stats) {
+//          statsGrid.innerHTML = `<p class="stats-label" style="grid-column: span 2;">Data statistik (Temp) tidak tersedia. Cek data EDA backend.</p>`;
+//          return;
+//     }
 
-    statsGrid.innerHTML = `
-        <div class="stats-section">
-            <h3>Statistik Kuantil</h3>
-            <div class="stats-row"><span class="stats-label">Mean:</span><span class="stats-value">${stats.mean.toFixed(2)}</span></div>
-            <div class="stats-row"><span class="stats-label">Q1 (25%):</span><span class="stats-value">${stats['25%'].toFixed(2)}</span></div>
-            <div class="stats-row"><span class="stats-label">Q2 (Median):</span><span class="stats-value">${stats['50%'].toFixed(2)}</span></div>
-            <div class="stats-row"><span class="stats-label">Q3 (75%):</span><span class="stats-value">${stats['75%'].toFixed(2)}</span></div>
-        </div>
-        <div class="stats-section">
-            <h3>Statistik Umum</h3>
-            <div class="stats-row"><span class="stats-label">Min:</span><span class="stats-value">${stats.min.toFixed(2)}</span></div>
-            <div class="stats-row"><span class="stats-label">Max:</span><span class="stats-value">${stats.max.toFixed(2)}</span></div>
-            <div class="stats-row"><span class="stats-label">Std:</span><span class="stats-value">${stats.std.toFixed(2)}</span></div>
-            <div class="stats-row"><span class="stats-label">Count:</span><span class="stats-value">${stats.count}</span></div>
-        </div>
-    `;
-}
+//     statsGrid.innerHTML = `
+//         <div class="stats-section">
+//             <h3>Statistik Kuantil</h3>
+//             <div class="stats-row"><span class="stats-label">Mean:</span><span class="stats-value">${stats.mean.toFixed(2)}</span></div>
+//             <div class="stats-row"><span class="stats-label">Q1 (25%):</span><span class="stats-value">${stats['25%'].toFixed(2)}</span></div>
+//             <div class="stats-row"><span class="stats-label">Q2 (Median):</span><span class="stats-value">${stats['50%'].toFixed(2)}</span></div>
+//             <div class="stats-row"><span class="stats-label">Q3 (75%):</span><span class="stats-value">${stats['75%'].toFixed(2)}</span></div>
+//         </div>
+//         <div class="stats-section">
+//             <h3>Statistik Umum</h3>
+//             <div class="stats-row"><span class="stats-label">Min:</span><span class="stats-value">${stats.min.toFixed(2)}</span></div>
+//             <div class="stats-row"><span class="stats-label">Max:</span><span class="stats-value">${stats.max.toFixed(2)}</span></div>
+//             <div class="stats-row"><span class="stats-label">Std:</span><span class="stats-value">${stats.std.toFixed(2)}</span></div>
+//             <div class="stats-row"><span class="stats-label">Count:</span><span class="stats-value">${stats.count}</span></div>
+//         </div>
+//     `;
+// }
 
 function showError(message) {
     document.getElementById('loading').classList.add('hidden');

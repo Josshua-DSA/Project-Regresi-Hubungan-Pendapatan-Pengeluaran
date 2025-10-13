@@ -97,6 +97,7 @@ body {
 .grid {
     display: grid;
     gap: 1.5rem;
+    flex-direction: row;
 }
 
 .grid-cols-3 {
