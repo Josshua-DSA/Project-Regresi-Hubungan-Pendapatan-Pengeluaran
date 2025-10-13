@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Analisis Model Prediksi</title>
         
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/styles.css"> 
 
 </head>
 <body>
@@ -25,74 +25,134 @@
         </div>
     </div>
     
-    <main id="main-content" class="container hidden">
-        <div class="grid">
-            <!-- Description Card -->
-            <div class="card">
-                <p class="description">Dashboard ini menampilkan hasil analisis regresi antara variabel <strong>Temperature</strong> dan <strong>Revenue</strong> dari dataset es krim. Gunakan informasi ini untuk memahami hubungan antara suhu dan pendapatan penjualan es krim.</p>
-            </div>
-
-            <!-- Chart Regression Card -->
-            <div class="card">
+    <main id="main-content" class="container">
+        <div class="slider" id="slider">
+            <!-- Tiap card jadi satu slide -->
+            <section class="slide active">
                 <div class="card-header">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    <h2 class="card-title">Grafik Regresi: Revenue vs Temperature</h2>
+                    <h2 class="card-title">Grafik Regresi</h2>
                 </div>
                 <div class="chart-container">
                     <canvas id="regressionChart"></canvas>
                 </div>
-            </div>
+                <p>
+                    Grafik regresi di atas menunjukkan hubungan yang **sangat kuat dan positif** antara suhu (temperature) dan pendapatan penjualan es krim (revenue). 
+                    Titik-titik merah menggambarkan data aktual penjualan, sedangkan garis biru menunjukkan hasil prediksi dari model regresi. 
+                    Pola data yang mengikuti garis regresi dengan rapat mengindikasikan bahwa ketika suhu meningkat, pendapatan penjualan es krim juga meningkat secara proporsional. 
+                    Hal ini logis karena pada suhu yang lebih tinggi, konsumsi es krim cenderung meningkat akibat permintaan yang lebih besar untuk produk yang menyegarkan. 
+                    Dengan demikian, model regresi ini mampu merepresentasikan hubungan linear yang kuat antara kenaikan suhu dan peningkatan penjualan es krim dengan tingkat kesalahan prediksi yang sangat kecil.
 
-            <!-- Histogram Temperature Card -->
-            <div class="card">
+                </p>
+            </section>
+
+            <section class="slide">
                 <div class="card-header">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    <h2 class="card-title" style="font-size: 1rem;">Histogram Variabel Temp</h2>
+                    <h2 class="card-title">Histogram Suhu</h2>
                 </div>
                 <div class="chart-container-small">
                     <canvas id="tempHistogram"></canvas>
                 </div>
-            </div>
+            </section>
 
-            <!-- Histogram Revenue Card -->
-            <div class="card">
+            <section class="slide">
                 <div class="card-header">
-                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    <h2 class="card-title" style="font-size: 1rem;">Histogram Variabel Revenue</h2>
+                    <h2 class="card-title">Histogram Revenue</h2>
                 </div>
                 <div class="chart-container-small">
                     <canvas id="revenueHistogram"></canvas>
                 </div>
-            </div>
+            </section>
 
-            <!-- Evaluation Metrics Card -->
-            <div class="card">
+            <section class="slide">
                 <div class="card-header">
-                    <span style="font-size: 1.25rem;">📊</span>
                     <h2 class="card-title">Evaluation Metrics</h2>
                 </div>
-                <div class="table-wrapper">
-                    <table id="metricsTable">
-                        <thead>
-                            <tr>
-                                <th>Metrik</th>
-                                <th class="text-right">Nilai</th>
-                            </tr>
-                        </thead>
-                        <tbody id="metricsBody">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                <table id="metricsTable">
+                    <thead>
+                        <tr><th>Metrik</th><th>Nilai</th></tr>
+                    </thead>
+                    <tbody id="metricsBody"></tbody>
+                </table>
+            </section>
         </div>
-        
-        <footer class="footer">
-            © 2025 Dashboard Analisis Regresi. All rights reserved.
-        </footer>
+
+        <!-- Tombol Navigasi -->
+        <div class="nav-buttons">
+            <button id="prevBtn" ><</button>
+            <button id="nextBtn">></button>
+        </div>
     </main>
+
+    <footer class="footer">
+            © 2025 Dashboard Analisis Regresi
+    </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     
     <script src="js/script.js"></script>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", () => {
+        const slides = document.querySelectorAll(".slide");
+        const slider = document.getElementById("slider");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        let currentSlide = 0;
+
+        // === Fungsi utama menampilkan slide ===
+        function showSlide(index) {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            currentSlide = index;
+
+            // Geser container
+            slider.style.transform = `translateX(-${index * 100}%)`;
+
+            slides.forEach((s, i) => s.classList.toggle("active", i === index));
+        }
+        
+        // === Fungsi navigasi ===
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // === Tombol navigasi ===
+        nextBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // mencegah klik tombol ikut dianggap klik layar
+            nextSlide();
+        });
+
+        prevBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            prevSlide();
+        });
+
+        // === Klik di mana saja di layar ===
+        document.body.addEventListener("click", (event) => {
+            const screenWidth = window.innerWidth;
+
+            // Klik di kiri layar → geser ke kiri
+            // Klik di kanan layar → geser ke kanan
+            if (event.clientX < screenWidth / 2) {
+            prevSlide();
+            } else {
+            nextSlide();
+            }
+        });
+
+        // === Mulai dari slide pertama ===
+        showSlide(0);
+        });
+
+        document.getElementById('slider').style.transform = 'translateX(-100%)';
+
+
+    </script>
+
 </body>
 </html>
