@@ -1,0 +1,10 @@
+# Direktori Virtual Environment
+venv/
+# Cache Python
+__pycache__/
+*.pyc
+# Direktori dan file yang tidak relevan
+.git/
+.gitignore
+matriks_output.csv
+matriks_output.json
