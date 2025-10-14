@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Analisis Model Prediksi</title>
+        
+    <link rel="stylesheet" href="css/style.css"> 
+
+</head>
+<body>
+
+    <header class="header">
+        <h1>Dashboard Analisis Regresi Linear</h1>
+    </header>
+
+    <main id="main-content" class="container">
+        <!-- Tiap card jadi satu slide -->
+        <div class="main">
+            <div class="deskripsi">
+                <h2 class="card-title">Regresi Linear Pendapatan Penjualan Es Krim</h2>
+                <p>
+                    Dashboard ini menyajikan analisis regresi linear sederhana yang menghubungkan suhu (temperature) dengan pendapatan penjualan es krim (revenue). 
+                    Data yang digunakan mencakup suhu harian dan pendapatan penjualan es krim selama periode tertentu. 
+                    Model regresi ini bertujuan untuk memprediksi pendapatan penjualan es krim berdasarkan suhu, dengan asumsi bahwa peningkatan suhu akan berbanding lurus dengan peningkatan permintaan es krim.
+                </p>
+            </div>
+            <img src="IceCream.png"></img>
+        </div>
+
+        <div class="card">
+
+            <div class="slide">
+                <div class="card-header">
+                    <h2 class="card-title">Histogram Suhu</h2>
+                </div>
+                <div class="content">
+                    <div class="chart-container-small">
+                        <canvas id="tempHistogram"></canvas>
+                    </div>
+                    <div>
+                        <p>
+                                Histogram di atas menunjukkan distribusi suhu (temperature) dalam data aktual. 
+                                Histogram ini memberikan gambaran tentang bagaimana suhu berdistribusi dalam data. 
+                                Dalam kasus ini, suhu yang lebih tinggi memiliki frekuensi yang lebih besar, menunjukkan bahwa sebagian besar data aktual memiliki suhu yang lebih tinggi. 
+                                Ini memberikan gambaran tentang bagaimana suhu berdistribusi dalam data aktual.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="card-header">
+                    <h2 class="card-title">Histogram Revenue</h2>
+                </div>
+                <div class="content">
+                    <div class="chart-container-small">
+                        <canvas id="revenueHistogram"></canvas>
+                    </div>
+                    <div>
+                        <p>
+                                Histogram di atas menunjukkan distribusi pendapatan penjualan es krim (revenue) dalam data aktual. 
+                                Histogram ini memberikan gambaran tentang bagaimana pendapatan berdistribusi dalam data. 
+                                Dalam kasus ini, pendapatan yang lebih tinggi memiliki frekuensi yang lebih besar, menunjukkan bahwa sebagian besar data aktual memiliki pendapatan yang lebih tinggi. 
+                                Ini memberikan gambaran tentang bagaimana pendapatan berdistribusi dalam data aktual.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="card-header">
+                    <h2 class="card-title">Grafik Regresi</h2>
+                </div>
+                <div class="content">
+                    <div class="chart-container">
+                        <canvas id="regressionChart"></canvas>
+                    </div>
+                    <div>
+                        <p>
+                                Grafik regresi di atas menunjukkan hubungan yang 'sangat kuat dan positif' antara suhu (temperature) dan pendapatan penjualan es krim (revenue). 
+                                Titik-titik merah menggambarkan data aktual penjualan, sedangkan garis biru menunjukkan hasil prediksi dari model regresi. 
+                                Pola data yang mengikuti garis regresi dengan rapat mengindikasikan bahwa ketika suhu meningkat, pendapatan penjualan es krim juga meningkat secara proporsional. 
+                                Hal ini logis karena pada suhu yang lebih tinggi, konsumsi es krim cenderung meningkat akibat permintaan yang lebih besar untuk produk yang menyegarkan. 
+                                Dengan demikian, model regresi ini mampu merepresentasikan hubungan linear yang kuat antara kenaikan suhu dan peningkatan penjualan es krim dengan tingkat kesalahan prediksi yang sangat kecil.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="card-header">
+                    <h2 class="card-title">Evaluation Metrics</h2>
+                </div>
+                <div class="content">
+                    <table id="metricsTable">
+                        <thead>
+                            <tr><th>Metrik</th><th>Nilai</th></tr>
+                        </thead>
+                        <tbody id="metricsBody"></tbody>
+                    </table>
+                    <div>
+                        <p>
+                                Tabel di atas menampilkan metrik evaluasi yang digunakan untuk mengukur performa model regresi. 
+                                Metrik ini memberikan gambaran tentang seberapa baik model regresi dapat memprediksi pendapatan es krim berdasarkan suhu. 
+                                Dalam kasus ini, metrik-metrik ini memberikan gambaran tentang seberapa baik model regresi dapat memprediksi pendapatan es krim berdasarkan suhu.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        © 2025 Dashboard Analisis Regresi
+    </footer>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <script src="js/script.js"></script>
+
+</body>
+</html>
