@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
 from matrix import Matrix
@@ -8,7 +8,8 @@ from operations.matriks_target import build_target
 from operations.eda import eda_csv_summary
 from regression.linear_regression import LinearRegression
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="board", static_folder="board")
+
 CORS(app)  # izinkan semua origin saat dev
 CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -91,7 +92,7 @@ def _histogram(values, bins=5):
 
 @app.get("/")
 def home():
-    return jsonify({"message": "Linear Regression Backend is running!"})
+    return render_template("index.html") 
 
 @app.get("/dashboard-data")
 def get_dashboard_data():

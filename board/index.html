@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Analisis Model Prediksi</title>
         
-    <link rel="stylesheet" href="css/style.css"> 
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
 </head>
 <body>
 
@@ -22,10 +21,10 @@
                 <p>
                     Dashboard ini menyajikan analisis regresi linear sederhana yang menghubungkan suhu (temperature) dengan pendapatan penjualan es krim (revenue). 
                     Data yang digunakan mencakup suhu harian dan pendapatan penjualan es krim selama periode tertentu. 
-                    Model regresi ini bertujuan untuk memprediksi pendapatan penjualan es krim berdasarkan suhu, dengan asumsi bahwa peningkatan suhu akan berbanding lurus dengan peningkatan permintaan es krim.
+                    Model regresi ini bertujuan untuk memprediksi pendapatan penjualan es krim berdasarkan suhu, dengan asumsi bahwa peningkatan suhu akan berbdockanding lurus dengan peningkatan permintaan es krim.
                 </p>
             </div>
-            <img src="IceCream.png"></img>
+            <img src="{{ url_for('static', filename='IceCream.png') }}" ...>
         </div>
 
         <div class="card">
@@ -119,7 +118,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     
-    <script src="js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>
